@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">KYS Partners</string>
+
+    <string name="profile">My Profile</string>
+    <string name="feed">FEED</string>
+    <string name="activity">ACTIVITY</string>
+    <string name="settings">SETTINGS</string>
+    <string name="shop_owner">Register your shop</string>
+    <string name="add_product">Add new products</string>
+    <string name="view_all">view all</string>
+    <string name="comments">Comments</string>
+    <string name="stat">Statistics</string>
+    <string name="my_product">Products</string>
+    <string name="edit">Edit Product</string>
+    <string name="shop_">Shop Details</string>
+    <string-array name="colors">
+        <item>#F44336</item>
+        <item>#009688</item>
+        <item>#0737d4</item>
+    </string-array>
+    <string name="already"><u>I already have an account</u></string>
+    <string name="forgot"><u>Forgot Password</u></string>
+    <string name="access"><u>Already have access code</u></string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="forgotActivity">Request Access Code</string>
+    <string name="accessActivity">Change Password</string>
+    <string name="com.zendesk.sdk.url" translatable="false">https://knowyourshop.zendesk.com</string>
+    <string name="com.zendesk.sdk.identifier" translatable="false">6bd1d3b44954de0b36a73976d0266f4a2dc31c813dd7bee3</string>
+    <string name="com.zendesk.sdk.clientIdentifier" translatable="false">mobile_sdk_client_8774c0e933e20e10e586</string>
+</resources>

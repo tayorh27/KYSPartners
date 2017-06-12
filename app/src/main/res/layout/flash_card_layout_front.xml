@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        app:contentPadding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Please upload products list in excel format."
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="italic|bold" />
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Check if this file is an updated one before selecting a file."
+                android:textSize="15sp"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/circle_shape"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/circular_progress_bar" />
+
+                <TextView
+                    android:id="@+id/progress_circle_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:text="0%"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/progressBar"
+                    android:layout_centerHorizontal="true"
+                    android:background="@android:color/transparent"
+                    android:text="waiting for file upload"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/btnFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    app:bootstrapBrand="primary"
+                    app:bootstrapSize="lg"
+                    app:bootstrapText="Select File"
+                    app:roundedCorners="true"
+                    app:showOutline="true" />
+
+                <ImageView
+                    android:id="@+id/ivSettings"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toLeftOf="@+id/btnFile"
+                    android:src="@drawable/ic_settings_black_24dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp"
+        app:contentPadding="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Please fill in the appropriate column index(starting from 0) of your excel file below and others."
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    android:textStyle="italic|bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="How many rows before the specific data?"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+                    <pl.polak.clicknumberpicker.ClickNumberPickerView
+                        android:id="@+id/st_rows_before"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:integer_priority="true"
+                        app:min_value="0"
+                        app:picker_corner_radius="10"
+                        app:pickers_background_color="@color/backgrounds"
+                        app:step="1"
+                        app:swipe_animation="true"
+                        app:swipe_enabled="false"
+                        app:value="1"
+                        app:value_animation_down="true"
+                        app:value_animation_up="true"
+                        app:value_background_color="@color/colorPrimaryDark"
+                        app:value_text_color="@android:color/white" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Product name column index"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+                    <pl.polak.clicknumberpicker.ClickNumberPickerView
+                        android:id="@+id/st_product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:integer_priority="true"
+                        app:min_value="0"
+                        app:picker_corner_radius="10"
+                        app:pickers_background_color="@color/backgrounds"
+                        app:step="1"
+                        app:swipe_animation="true"
+                        app:swipe_enabled="false"
+                        app:value="1"
+                        app:value_animation_down="true"
+                        app:value_animation_up="true"
+                        app:value_background_color="@color/colorPrimaryDark"
+                        app:value_text_color="@android:color/white" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Product category column index"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+                    <pl.polak.clicknumberpicker.ClickNumberPickerView
+                        android:id="@+id/st_product_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:integer_priority="true"
+                        app:min_value="0"
+                        app:picker_corner_radius="10"
+                        app:pickers_background_color="@color/backgrounds"
+                        app:step="1"
+                        app:swipe_animation="true"
+                        app:swipe_enabled="false"
+                        app:value="1"
+                        app:value_animation_down="true"
+                        app:value_animation_up="true"
+                        app:value_background_color="@color/colorPrimaryDark"
+                        app:value_text_color="@android:color/white" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Product price column index"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+                    <pl.polak.clicknumberpicker.ClickNumberPickerView
+                        android:id="@+id/st_product_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:integer_priority="true"
+                        app:min_value="0"
+                        app:picker_corner_radius="10"
+                        app:pickers_background_color="@color/backgrounds"
+                        app:step="1"
+                        app:swipe_animation="true"
+                        app:swipe_enabled="false"
+                        app:value="1"
+                        app:value_animation_down="true"
+                        app:value_animation_up="true"
+                        app:value_background_color="@color/colorPrimaryDark"
+                        app:value_text_color="@android:color/white" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Product description column index"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+                    <pl.polak.clicknumberpicker.ClickNumberPickerView
+                        android:id="@+id/st_product_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:integer_priority="true"
+                        app:min_value="0"
+                        app:picker_corner_radius="10"
+                        app:pickers_background_color="@color/backgrounds"
+                        app:step="1"
+                        app:swipe_animation="true"
+                        app:swipe_enabled="false"
+                        app:value="1"
+                        app:value_animation_down="true"
+                        app:value_animation_up="true"
+                        app:value_background_color="@color/colorPrimaryDark"
+                        app:value_text_color="@android:color/white" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stock Level column index"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp" />
+
+                    <pl.polak.clicknumberpicker.ClickNumberPickerView
+                        android:id="@+id/st_product_stock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:integer_priority="true"
+                        app:min_value="0"
+                        app:picker_corner_radius="10"
+                        app:pickers_background_color="@color/backgrounds"
+                        app:step="1"
+                        app:swipe_animation="true"
+                        app:swipe_enabled="false"
+                        app:value="1"
+                        app:value_animation_down="true"
+                        app:value_animation_up="true"
+                        app:value_background_color="@color/colorPrimaryDark"
+                        app:value_text_color="@android:color/white" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorPrimary" />
+
+                <com.beardedhen.androidbootstrap.BootstrapButton
+                    android:id="@+id/btnDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    app:bootstrapBrand="primary"
+                    app:bootstrapSize="lg"
+                    app:bootstrapText="Done"
+                    app:roundedCorners="true"
+                    app:showOutline="true" />
+
+
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

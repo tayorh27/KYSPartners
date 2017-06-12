@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_playlist_add_black_24dp"
+        android:orderInCategory="100"
+        android:title="Add product"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:orderInCategory="100"
+        android:title="Save data for offline"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_load"
+        android:icon="@drawable/ic_cloud_download_black_24dp"
+        android:orderInCategory="100"
+        android:title="Load products from server"
+        app:showAsAction="ifRoom" />
+</menu>
