@@ -126,6 +126,7 @@
                     android:id="@+id/img_feed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:src="@drawable/ic_rss_feed_black_24dp" />
 
                 <TextView

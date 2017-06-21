@@ -81,15 +81,13 @@ public class General {
 
             String dest = new_image_file.getPath();
             new_file_path = dest;
-            if (new_image_file.exists()) {
-                new_image_file.delete();
-            }
+
             fileOutputStream = new FileOutputStream(dest);
             Bitmap bitmap = BitmapFactory.decodeFile(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Log.e("file exception", e.toString());
         } catch (Exception ex) {
             Log.e("normal exception", ex.toString());
         } finally {
@@ -97,7 +95,7 @@ public class General {
                 try {
                     fileOutputStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e("io exception", e.toString());
                 }
             }
         }

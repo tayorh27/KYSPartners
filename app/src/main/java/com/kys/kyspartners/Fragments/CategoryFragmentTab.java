@@ -142,7 +142,11 @@ public class CategoryFragmentTab extends Fragment implements LogTypeCallback, Vi
         Set<String> keys = _value.keySet();
 
         for (String st : keys) {
-            xAxis.add(st.substring(0, 3));
+            if (st.length() > 2) {
+                xAxis.add(st.substring(0, 3));
+            } else {
+                xAxis.add(st);
+            }
             listArray.add(st);
         }
 

@@ -81,6 +81,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
     String imageUrl = "";
     String imgDecodableString = "";
     int unique_value = 0;
+    EditText[] editTexts;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,7 +119,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
         stepperTouch.setOnLongClickListener(this);
         imageView.setOnClickListener(this);
         editCategory.setThreshold(1);
-
+        editTexts = new EditText[]{editName, editDesc, editPrice};
         GetTypeForChart();
     }
 
@@ -129,7 +130,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
         product_price = editPrice.getText().toString();
         inStock = String.valueOf(stepperTouch.getValue());
 
-        int value = new Random().nextInt(9000000);
+        int value = new Random().nextInt(9999999);
         unique_value = value + General.AddNumber();
 
         if (!CheckFields()) {
@@ -151,7 +152,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
         } else {
             actionProcessButton.setEnabled(false);
             RegisterProducts registerProducts = new RegisterProducts(getActivity(), myProduct);
-            registerProducts.Register(actionProcessButton, getActivity());
+            registerProducts.Register(actionProcessButton, editTexts, editCategory);
         }
     }
 
@@ -216,7 +217,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
                 if (serverResponse != null) {
                     if (serverResponse.getSuccess()) {
                         RegisterProducts registerProducts = new RegisterProducts(getActivity(), myProduct);
-                        registerProducts.Register(actionProcessButton, getActivity());
+                        registerProducts.Register(actionProcessButton, editTexts, editCategory);
                         Log.e("tonSuccess", serverResponse.getMessage());
                         //Toast.makeText(context, serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
@@ -290,7 +291,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
 
     private void GetTypeForChart() {
         GetLogType getLogType = new GetLogType(getActivity(), this);
-        getLogType.getShopLogByType("Category",null);
+        getLogType.getShopLogByType("Category", null);
     }
 
     @Override

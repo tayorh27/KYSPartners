@@ -3,6 +3,7 @@ package com.kys.kyspartners.network;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -12,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.kys.kyspartners.Activity.LoginActivity;
 import com.kys.kyspartners.Activity.ProductsActivity;
 import com.kys.kyspartners.AppConfig;
 import com.kys.kyspartners.Database.AppData;
@@ -51,7 +53,7 @@ public class UpdateProductById {
         user = data.getUser();
     }
 
-    public void UpdateById(final ActionProcessButton actionProcessButton, final Activity activity) {
+    public void UpdateById(final ActionProcessButton actionProcessButton, final Activity activity, final String[] c_params, final String... parameters) {
         String url = AppConfig.WEB_URL + "UpdateProduct.php?user_id=" + user.id;
         actionProcessButton.setProgress(1);
 
@@ -65,6 +67,10 @@ public class UpdateProductById {
                     success = object.getInt("success");
                     if (success == 1) {
                         MyApplication.getWritableDatabase().updateDatabase(products);
+                        AsyncUpdateProductName asyncUpdateProductName = new AsyncUpdateProductName(parameters);
+                        asyncUpdateProductName.execute();
+                        AsyncUpdateCategoryName asyncUpdateCategoryName = new AsyncUpdateCategoryName(c_params);
+                        asyncUpdateCategoryName.execute();
                         Toast.makeText(context, "Product updated.", Toast.LENGTH_SHORT).show();
                         context.startActivity(new Intent(context, ProductsActivity.class));
                         activity.finish();
@@ -111,5 +117,79 @@ public class UpdateProductById {
             }
         };
         requestQueue.add(stringRequest);
+    }
+
+    private void UpdateProductName(String product_name, String old_product_name, String user_id) {
+        String url = AppConfig.WEB_URL + "UpdateProductName.php?product_name=" + product_name + "&old_product_name=" + old_product_name + "&user_id=" + user_id;
+        String _url = url.replace(" ", "%20");
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, _url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                int success;
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    success = jsonObject.getInt("success");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    private class AsyncUpdateProductName extends AsyncTask<Void, Void, Void> {
+
+        String[] parameters;
+
+        private AsyncUpdateProductName(String... parameters) {
+            this.parameters = parameters;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            UpdateProductName(parameters[0], parameters[1], parameters[2]);
+            return null;
+        }
+    }
+
+    private void UpdateCategoryName(String category_name, String old_category_name, String user_id) {
+        String url = AppConfig.WEB_URL + "UpdateCategoryName.php?category_name=" + category_name + "&old_category_name=" + old_category_name + "&user_id=" + user_id;
+        String _url = url.replace(" ", "%20");
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, _url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                int success;
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    success = jsonObject.getInt("success");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    private class AsyncUpdateCategoryName extends AsyncTask<Void, Void, Void> {
+
+        String[] parameters;
+
+        private AsyncUpdateCategoryName(String... parameters) {
+            this.parameters = parameters;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            UpdateCategoryName(parameters[0], parameters[1], parameters[2]);
+            return null;
+        }
     }
 }

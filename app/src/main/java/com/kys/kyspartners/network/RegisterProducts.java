@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +66,7 @@ public class RegisterProducts {
 
     }
 
-    public void Register(final ActionProcessButton actionProcessButton, final Activity activity) {
+    public void Register(final ActionProcessButton actionProcessButton, final EditText[] editTexts, final AutoCompleteTextView aTV) {
         String url = AppConfig.WEB_URL + "RegisterProducts.php";
         actionProcessButton.setProgress(1);
 
@@ -83,6 +85,12 @@ public class RegisterProducts {
                         p.add(products);
                         MyApplication.getWritableDatabase().insertMyProducts(p, false);
                         Toast.makeText(context, "Product uploaded.", Toast.LENGTH_SHORT).show();
+                        actionProcessButton.setEnabled(true);
+                        actionProcessButton.setProgress(0);
+                        for (EditText et : editTexts) {
+                            et.setText("");
+                        }
+                        aTV.setText("");
                         //context.startActivity(new Intent(context, AddProductActivity.class));
 
                     } else if (success == 0) {

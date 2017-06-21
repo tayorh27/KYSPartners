@@ -273,10 +273,14 @@ public class OwnerActivity extends AppCompatActivity implements GoogleApiClient.
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
             }, MY_PERMISSION_REQUEST_CODE);
         } else {
             if (checkPlayServices()) {
@@ -503,7 +507,7 @@ public class OwnerActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
-    private void stopGoogle(){
+    private void stopGoogle() {
         if (mGoogleApiClient != null) {
             if (mGoogleApiClient.isConnected()) {
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -527,6 +531,7 @@ public class OwnerActivity extends AppCompatActivity implements GoogleApiClient.
         editArea.setText(area);
         editStrt.setText(inside_area);
         general.dismissDialog();
+        OnDismissMaterialDialog();
     }
 
     @Override

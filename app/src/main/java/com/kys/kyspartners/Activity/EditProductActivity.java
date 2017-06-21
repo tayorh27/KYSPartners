@@ -32,6 +32,7 @@ import com.kys.kyspartners.Database.AppData;
 import com.kys.kyspartners.General;
 import com.kys.kyspartners.Information.Products;
 import com.kys.kyspartners.Information.Shop;
+import com.kys.kyspartners.Information.User;
 import com.kys.kyspartners.R;
 import com.kys.kyspartners.ServerResponse;
 import com.kys.kyspartners.Utility.Separation;
@@ -73,6 +74,10 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
     String initial_load = "";
     int id = 0;
     int unique_value = 0;
+    String old_product_name, old_category_name;
+    String[] values = new String[3];
+    String[] c_values = new String[3];
+    User user;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -91,6 +96,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         general = new General(EditProductActivity.this);
         Shop shop = data.getShop();
         shop_name = shop.name;
+        user = data.getUser();
 
         imageView = (ImageView) findViewById(R.id.btnRefresh);
         logo = (BootstrapCircleThumbnail) findViewById(R.id.productLogo);
@@ -131,6 +137,8 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         editCategory.setText(cat);
         editPrice.setText(pr);
         stepperTouch.setPickerValue(Float.parseFloat(st));
+        old_product_name = nm;
+        old_category_name = cat;
 
         GetTypeForChart();
     }
@@ -141,6 +149,14 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         product_description = editDesc.getText().toString();
         product_price = editPrice.getText().toString();
         inStock = String.valueOf(stepperTouch.getValue());
+        values[0] = product_name;
+        values[1] = old_product_name;
+        values[2] = user.id + "";
+
+        c_values[0] = product_category;
+        c_values[1] = old_category_name;
+        c_values[2] = user.id + "";
+
 
         if (!CheckFields()) {
             general.error("Please all fields must be filled.");
@@ -197,13 +213,14 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
+                Log.e("result upload", imgDecodableString);
                 logo.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
             } else {
                 Toast.makeText(EditProductActivity.this, "You haven't picked Image", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("result exception", e.toString());
         }
     }
 
@@ -251,7 +268,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
 
     private void UpdateProduct() {
         UpdateProductById updateProductById = new UpdateProductById(EditProductActivity.this, myProduct);
-        updateProductById.UpdateById(actionProcessButton, EditProductActivity.this);
+        updateProductById.UpdateById(actionProcessButton, EditProductActivity.this, c_values, values);
     }
 
     @Override
@@ -333,7 +350,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
 
     private void GetTypeForChart() {
         GetLogType getLogType = new GetLogType(EditProductActivity.this, this);
-        getLogType.getShopLogByType("Category",null);
+        getLogType.getShopLogByType("Category", null);
     }
 
     @Override

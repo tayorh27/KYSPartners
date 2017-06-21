@@ -267,7 +267,7 @@ public class ExcelFragmentTab extends Fragment implements View.OnClickListener {
                 shoppingCart.shop_name = shop.name;
                 shoppingCart.product_logo = "no_logo.jpeg";
                 shoppingCart.type = "excel";
-                int value = new Random().nextInt(9000000);
+                int value = new Random().nextInt(9999999);
                 shoppingCart.unique_value = value - General.AddNumber();
                 // Add object to list
                 customData.add(shoppingCart);

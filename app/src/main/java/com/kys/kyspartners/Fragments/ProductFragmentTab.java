@@ -89,7 +89,7 @@ public class ProductFragmentTab extends Fragment implements LogTypeCallback, Vie
 
     private void GetTypeForChart() {
         GetLogType getLogType = new GetLogType(getActivity(), this);
-        getLogType.getShopLogByType("Product",null);
+        getLogType.getShopLogByType("Product", null);
     }
 
     @Override
@@ -140,7 +140,11 @@ public class ProductFragmentTab extends Fragment implements LogTypeCallback, Vie
         Set<String> keys = _value.keySet();
 
         for (String st : keys) {
-            xAxis.add(st.substring(0, 3));
+            if (st.length() > 2) {
+                xAxis.add(st.substring(0, 3));
+            } else {
+                xAxis.add(st);
+            }
             listArray.add(st);
         }
 

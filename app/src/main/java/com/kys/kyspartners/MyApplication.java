@@ -16,6 +16,7 @@ import com.zendesk.sdk.model.access.AnonymousIdentity;
 import com.zendesk.sdk.network.impl.ZendeskConfig;
 
 import io.fabric.sdk.android.Fabric;
+import okhttp3.OkHttpClient;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -40,6 +41,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        //UploadService.NAMESPACE = BuildConfig.APPLICATION_ID;
+        OkHttpClient client = new OkHttpClient(); // create your own OkHttp client
         Fabric.with(this, new Crashlytics());
         data = new AppData(getAppContext());
         user = data.getUser();
