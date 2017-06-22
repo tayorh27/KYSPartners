@@ -106,6 +106,7 @@ dependencies {
     compile 'com.github.yesidlazaro:GmailBackground:1.2.0'
     compile 'com.webianks.library:easy-feedback:1.0.0'
     compile 'com.devs:acr:1.0.1'
+    compile 'id.zelory:compressor:2.0.0'
     compile 'com.github.rey5137:material:1.2.4'
     compile 'com.borax12.materialdaterangepicker:library:1.9'
     compile 'it.neokree:MaterialTabs:0.11'

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
@@ -97,6 +98,7 @@ public class ShopActivity extends AppCompatActivity implements TimePickerDialog.
     String name = "", desc = "", full_add = "", city = "", area = "", inside_area = "", phone_number = "", open = "", close = "";
     Shop myShop = null;
     User user;
+    Bitmap bitmap;
 
     private boolean CheckFields() {
         if (name.isEmpty() || desc.isEmpty() || full_add.isEmpty() || city.isEmpty() || area.isEmpty() || inside_area.isEmpty()
@@ -200,7 +202,8 @@ public class ShopActivity extends AppCompatActivity implements TimePickerDialog.
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                logo.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                bitmap = general.compressedBitmapShop(imgDecodableString);
+                logo.setImageBitmap(bitmap);
 
             } else {
                 Toast.makeText(this, "You haven't picked Image",
@@ -243,7 +246,7 @@ public class ShopActivity extends AppCompatActivity implements TimePickerDialog.
             return;
         }
         if (!imgDecodableString.isEmpty()) {
-            imagePath = General.CopyTo(imgDecodableString, name.replace(" ", "_"));
+            imagePath = General.CopyTo(bitmap, name.replace(" ", "_"));
             imageUrl = imagePath.substring(imagePath.lastIndexOf("/") + 1);
         } else {
             view.setTag("register");

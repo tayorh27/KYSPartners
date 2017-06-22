@@ -3,6 +3,7 @@ package com.kys.kyspartners.Fragments;
 import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,6 +83,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
     String imgDecodableString = "";
     int unique_value = 0;
     EditText[] editTexts;
+    Bitmap bitmap;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,7 +140,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
             return;
         }
         if (!imgDecodableString.isEmpty()) {
-            imagePath = General.CopyTo(imgDecodableString, product_name.replace(" ", "_"));
+            imagePath = General.CopyTo(bitmap, product_name.replace(" ", "_"));
             imageUrl = imagePath.substring(imagePath.lastIndexOf("/") + 1);
         } else {
             imageUrl = "no_logo.jpeg";
@@ -189,7 +191,8 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                logo.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                bitmap = general.compressedBitmap(imgDecodableString);
+                logo.setImageBitmap(bitmap);
 
             } else {
                 Toast.makeText(getActivity(), "You haven't picked Image", Toast.LENGTH_LONG).show();

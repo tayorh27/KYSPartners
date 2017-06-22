@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Random;
 
+import id.zelory.compressor.Compressor;
+
 /**
  * Created by sanniAdewale on 11/05/2017.
  */
@@ -64,7 +66,29 @@ public class General {
                 .show();
     }
 
-    public static String CopyTo(String file, String username) {
+    public Bitmap compressedBitmap(String file) {
+        File imageFile = new File(file);
+        Bitmap compressor = new Compressor(context)
+                .setMaxWidth(680)
+                .setMaxHeight(240)
+                .setQuality(100)
+                .setCompressFormat(Bitmap.CompressFormat.PNG)
+                .compressToBitmap(imageFile);
+        return compressor;
+    }
+
+    public Bitmap compressedBitmapShop(String file) {
+        File imageFile = new File(file);
+        Bitmap compressor = new Compressor(context)
+                .setMaxWidth(96)
+                .setMaxHeight(96)
+                .setQuality(100)
+                .setCompressFormat(Bitmap.CompressFormat.PNG)
+                .compressToBitmap(imageFile);
+        return compressor;
+    }
+
+    public static String CopyTo(Bitmap bitmap, String username) {
         String new_file_path = "";
         FileOutputStream fileOutputStream = null;
         try {
@@ -83,7 +107,7 @@ public class General {
             new_file_path = dest;
 
             fileOutputStream = new FileOutputStream(dest);
-            Bitmap bitmap = BitmapFactory.decodeFile(file);
+            //Bitmap bitmap = BitmapFactory.decodeFile(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
 
         } catch (FileNotFoundException e) {

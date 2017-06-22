@@ -91,6 +91,8 @@ public class ProductsActivity extends AppCompatActivity implements ShopsClickLis
         bundle.putString("load", initial_load);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
+
     }
 
     @Override

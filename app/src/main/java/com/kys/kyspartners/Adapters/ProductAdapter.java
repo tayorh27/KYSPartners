@@ -49,7 +49,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     @Override
     public void onBindViewHolder(final ProductHolder holder, int position) {
         Products current = productArrayList.get(position);
-        String url = AppConfig.WEB_URL + "images/" + current.product_logo;
+        String url = AppConfig.WEB_URL2 + "images/" + current.product_logo;
         String _url = url.replace(" ", "%20");
 
         holder.sName.setText(current.product_name);

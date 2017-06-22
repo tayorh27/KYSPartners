@@ -3,6 +3,7 @@ package com.kys.kyspartners.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -78,6 +79,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
     String[] values = new String[3];
     String[] c_values = new String[3];
     User user;
+    Bitmap bitmap;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -163,7 +165,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
             return;
         }
         if (!imgDecodableString.isEmpty()) {
-            imagePath = General.CopyTo(imgDecodableString, product_name.replace(" ", "_"));
+            imagePath = General.CopyTo(bitmap, product_name.replace(" ", "_"));
             imageUrl = imagePath.substring(imagePath.lastIndexOf("/") + 1);
         } else {
             //imageUrl = "no_logo.jpeg";
@@ -214,7 +216,8 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
                 imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
                 Log.e("result upload", imgDecodableString);
-                logo.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                bitmap = general.compressedBitmap(imgDecodableString);
+                logo.setImageBitmap(bitmap);
 
             } else {
                 Toast.makeText(EditProductActivity.this, "You haven't picked Image", Toast.LENGTH_LONG).show();
@@ -340,6 +343,7 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+            startActivity(new Intent(EditProductActivity.this, ProductsActivity.class));
             finish();
         }
         if (id == R.id.action_delete) {
