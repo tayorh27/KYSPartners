@@ -25,6 +25,7 @@ import com.kys.kyspartners.Callbacks.RatingCallback;
 import com.kys.kyspartners.Database.AppData;
 import com.kys.kyspartners.Information.Comments;
 import com.kys.kyspartners.Information.Log;
+import com.kys.kyspartners.Information.Products;
 import com.kys.kyspartners.Information.Shop;
 import com.kys.kyspartners.MyApplication;
 import com.kys.kyspartners.R;
@@ -174,9 +175,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (id == R.id.support_centre) {
             // Start ContactZendeskActivity for a standalone way to create requests
-
             RequestActivity.startActivity(HomeActivity.this, null);
-
         }
         if (id == R.id.sign_out) {
             new MaterialDialog.Builder(this)
@@ -189,6 +188,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                             MyApplication.getWritableDatabase().deleteAll();
                             data.SignOut();
+                            ArrayList<Products> products = MyApplication.getWritableDatabase().getAllMyProducts();
+                            if (products.isEmpty()) {
+                                Products p = new Products(0, "none", "", "", "", "", "", "", "", 0);
+                                ArrayList<Products> c = new ArrayList<>();
+                                c.add(p);
+                                MyApplication.getWritableDatabase().insertMyProducts(c, false);
+                            }
                             startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                             finish();
                         }
@@ -227,5 +233,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRefresh() {
         LoadCommentsAndFeeds();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (refreshLayout.isRefreshing()) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 }

@@ -105,7 +105,11 @@ public class ProductsActivity extends AppCompatActivity implements ShopsClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            startActivity(new Intent(ProductsActivity.this, AddProductActivity.class));
+            Intent intent = new Intent(ProductsActivity.this, AddProductActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("home", "from_home");
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
         if (id == android.R.id.home) {
             finish();

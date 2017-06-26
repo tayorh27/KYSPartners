@@ -189,7 +189,7 @@ public class OwnerActivity extends AppCompatActivity implements GoogleApiClient.
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("imageResult", e.toString());
         }
     }
 
@@ -322,7 +322,7 @@ public class OwnerActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void RequestPermissions() {
-        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE};
+        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         PermissionManager permissionManager = new PermissionManager(OwnerActivity.this, permissions);
         if (!permissionManager.hasAllPermissions()) {
             permissionManager.requestPermissions(MY_PERMISSION_REQUEST_CODE);
@@ -379,6 +379,12 @@ public class OwnerActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         displayLocation();
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        general.getMaterialDialog().dismiss();
                     }
                 })
                 .show();

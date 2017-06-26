@@ -154,7 +154,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
         } else {
             actionProcessButton.setEnabled(false);
             RegisterProducts registerProducts = new RegisterProducts(getActivity(), myProduct);
-            registerProducts.Register(actionProcessButton, editTexts, editCategory);
+            registerProducts.Register(actionProcessButton, editTexts, editCategory, logo, stepperTouch);
         }
     }
 
@@ -220,7 +220,7 @@ public class ManualFragmentTab extends Fragment implements View.OnClickListener,
                 if (serverResponse != null) {
                     if (serverResponse.getSuccess()) {
                         RegisterProducts registerProducts = new RegisterProducts(getActivity(), myProduct);
-                        registerProducts.Register(actionProcessButton, editTexts, editCategory);
+                        registerProducts.Register(actionProcessButton, editTexts, editCategory, logo, stepperTouch);
                         Log.e("tonSuccess", serverResponse.getMessage());
                         //Toast.makeText(context, serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {

@@ -90,7 +90,7 @@ public class CategoryFragmentTab extends Fragment implements LogTypeCallback, Vi
 
     private void GetTypeForChart() {
         GetLogType getLogType = new GetLogType(getActivity(), this);
-        getLogType.getShopLogByType("Category",null);
+        getLogType.getShopLogByType("Category", null);
     }
 
     @Override
@@ -193,5 +193,13 @@ public class CategoryFragmentTab extends Fragment implements LogTypeCallback, Vi
         dialog.setCanceledOnTouchOutside(true);
         dialog.setCancelable(true);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshLayout.isRefreshing()) {
+            refreshLayout.setRefreshing(false);
+        }
     }
 }

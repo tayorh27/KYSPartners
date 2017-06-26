@@ -79,13 +79,12 @@ public class General {
 
     public Bitmap compressedBitmapShop(String file) {
         File imageFile = new File(file);
-        Bitmap compressor = new Compressor(context)
-                .setMaxWidth(96)
-                .setMaxHeight(96)
+        return new Compressor(context)
+                .setMaxWidth(128)
+                .setMaxHeight(128)
                 .setQuality(100)
                 .setCompressFormat(Bitmap.CompressFormat.PNG)
                 .compressToBitmap(imageFile);
-        return compressor;
     }
 
     public static String CopyTo(Bitmap bitmap, String username) {

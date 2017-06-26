@@ -3,6 +3,7 @@ package com.kys.kyspartners.network;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.widget.AutoCompleteTextView;
@@ -17,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.beardedhen.androidbootstrap.BootstrapCircleThumbnail;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.github.jorgecastilloprz.FABProgressCircle;
 import com.kys.kyspartners.Activity.AddProductActivity;
@@ -28,6 +30,7 @@ import com.kys.kyspartners.Information.Products;
 import com.kys.kyspartners.Information.Shop;
 import com.kys.kyspartners.Information.User;
 import com.kys.kyspartners.MyApplication;
+import com.kys.kyspartners.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +38,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import pl.polak.clicknumberpicker.ClickNumberPickerView;
 
 /**
  * Created by sanniAdewale on 12/05/2017.
@@ -66,7 +71,8 @@ public class RegisterProducts {
 
     }
 
-    public void Register(final ActionProcessButton actionProcessButton, final EditText[] editTexts, final AutoCompleteTextView aTV) {
+    public void Register(final ActionProcessButton actionProcessButton, final EditText[] editTexts, final AutoCompleteTextView aTV,
+                         final BootstrapCircleThumbnail logo, final ClickNumberPickerView pickerView) {
         String url = AppConfig.WEB_URL + "RegisterProducts.php";
         actionProcessButton.setProgress(1);
 
@@ -91,6 +97,8 @@ public class RegisterProducts {
                             et.setText("");
                         }
                         aTV.setText("");
+                        logo.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.no_logo));
+                        pickerView.setPickerValue(1);
                         //context.startActivity(new Intent(context, AddProductActivity.class));
 
                     } else if (success == 0) {

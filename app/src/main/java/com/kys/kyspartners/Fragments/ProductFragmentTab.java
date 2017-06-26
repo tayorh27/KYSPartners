@@ -191,4 +191,12 @@ public class ProductFragmentTab extends Fragment implements LogTypeCallback, Vie
         dialog.setCanceledOnTouchOutside(true);
         dialog.setCancelable(true);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refreshLayout.isRefreshing()) {
+            refreshLayout.setRefreshing(false);
+        }
+    }
 }

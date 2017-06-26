@@ -210,7 +210,7 @@ public class ShopActivity extends AppCompatActivity implements TimePickerDialog.
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("imageResult", e.toString());
         }
     }
 
@@ -342,7 +342,7 @@ public class ShopActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     private void RequestPermissions() {
-        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE};
+        String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         PermissionManager permissionManager = new PermissionManager(ShopActivity.this, permissions);
         if (!permissionManager.hasAllPermissions()) {
             permissionManager.requestPermissions(MY_PERMISSION_REQUEST_CODE);
@@ -399,6 +399,12 @@ public class ShopActivity extends AppCompatActivity implements TimePickerDialog.
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         displayLocation();
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        general.dismissDialog();
                     }
                 })
                 .show();
@@ -541,7 +547,7 @@ public class ShopActivity extends AppCompatActivity implements TimePickerDialog.
         });
     }
 
-    private void stopGoogle(){
+    private void stopGoogle() {
         if (mGoogleApiClient != null) {
             if (mGoogleApiClient.isConnected()) {
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
