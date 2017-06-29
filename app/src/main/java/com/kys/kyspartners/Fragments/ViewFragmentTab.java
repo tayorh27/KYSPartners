@@ -1,5 +1,6 @@
 package com.kys.kyspartners.Fragments;
 
+import android.animation.ValueAnimator;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -58,10 +59,19 @@ public class ViewFragmentTab extends Fragment implements ViewCallback {
 
     @Override
     public void onView(int number, int ratingCount, double rating) {
-        clicks.setText("" + number);
+        //clicks.setText("" + number);
         ratings.setText("" + rating);
         ratingBar.setRating((float) rating);
         rCount.setText("" + ratingCount);
+
+        ValueAnimator animator = ValueAnimator.ofInt(0, number);
+        animator.setDuration(5000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                clicks.setText(animation.getAnimatedValue().toString());
+            }
+        });
+        animator.start();
     }
 
     @Override
@@ -74,7 +84,7 @@ public class ViewFragmentTab extends Fragment implements ViewCallback {
             public void run() {
                 GetNumberOfViewsAndRatings();
             }
-        }, 0, 5000);
+        }, 0, 30000);
     }
 
     @Override

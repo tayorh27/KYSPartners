@@ -75,7 +75,7 @@ public class ExcelFragmentTab extends Fragment implements View.OnClickListener {
     CheckBox checkBox;
     Timer timer, timer2;
 
-    ClickNumberPickerView stepperTouch1, stepperTouch2, stepperTouch3, stepperTouch4, stepperTouch5, stepperTouch6;
+    ClickNumberPickerView stepperTouch1, stepperTouch2, stepperTouch3, stepperTouch4, stepperTouch5, stepperTouch6, stepperTouch7;
     ArrayList<Products> customData = new ArrayList<>();
 
     @Override
@@ -117,6 +117,7 @@ public class ExcelFragmentTab extends Fragment implements View.OnClickListener {
         stepperTouch4 = (ClickNumberPickerView) view.findViewById(R.id.st_product_desc);
         stepperTouch5 = (ClickNumberPickerView) view.findViewById(R.id.st_product_stock);
         stepperTouch6 = (ClickNumberPickerView) view.findViewById(R.id.st_product_name);
+        stepperTouch7 = (ClickNumberPickerView) view.findViewById(R.id.st_product_logo);
         checkBox = (CheckBox) view.findViewById(R.id.checkbox);
         settings.setOnClickListener(this);
         button.setOnClickListener(this);
@@ -257,6 +258,8 @@ public class ExcelFragmentTab extends Fragment implements View.OnClickListener {
                         shoppingCart.product_price = cellValue;
                     } else if (myCell.getColumnIndex() == excel.product_desc) {
                         shoppingCart.product_description = cellValue;
+                    } else if (myCell.getColumnIndex() == excel.product_logo) {
+                        shoppingCart.product_logo = cellValue;
                     } else if (myCell.getColumnIndex() == excel.stock) {
                         shoppingCart.inStock = cellValue;
                     }
@@ -265,7 +268,6 @@ public class ExcelFragmentTab extends Fragment implements View.OnClickListener {
                 }
                 shoppingCart.id = 0;
                 shoppingCart.shop_name = shop.name;
-                shoppingCart.product_logo = "no_logo.jpeg";
                 shoppingCart.type = "excel";
                 int value = new Random().nextInt(9999999);
                 shoppingCart.unique_value = value - General.AddNumber();
@@ -301,8 +303,9 @@ public class ExcelFragmentTab extends Fragment implements View.OnClickListener {
         int p_category = (int) stepperTouch2.getValue();
         int p_price = (int) stepperTouch3.getValue();
         int p_desc = (int) stepperTouch4.getValue();
+        int p_logo = (int) stepperTouch7.getValue();
         int p_stock = (int) stepperTouch5.getValue();
-        Excel excel = new Excel(row_before, p_name, p_category, p_price, p_desc, p_stock);
+        Excel excel = new Excel(row_before, p_name, p_category, p_price, p_desc, p_logo, p_stock);
         data.setExcelSettingsAdded(true);
         data.setExcelSettings(excel);
         cardView2.setVisibility(View.GONE);
@@ -317,7 +320,7 @@ public class ExcelFragmentTab extends Fragment implements View.OnClickListener {
         stepperTouch4.setPickerValue(excel.product_desc);
         stepperTouch5.setPickerValue(excel.stock);
         stepperTouch6.setPickerValue(excel.product_name);
-
+        stepperTouch7.setPickerValue(excel.product_logo);
     }
 
     private void UpdateAllProducts() {

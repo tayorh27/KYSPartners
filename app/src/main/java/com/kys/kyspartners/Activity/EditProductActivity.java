@@ -132,6 +132,10 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
         unique_value = bundle.getInt("unique_value");
         initial_load = bundle.getString("load");
         String url = AppConfig.WEB_URL2 + "images/" + _logo;
+        if(_logo.contains("http") || _logo.contains("www.")){
+            url = _logo;
+            imageUrl = _logo;
+        }
         String web = url.replace(" ", "%20");
         Glide.with(EditProductActivity.this).load(web).fitCenter().centerCrop().placeholder(R.drawable.no_logo).into(logo);
         editName.setText(nm);
@@ -350,6 +354,12 @@ public class EditProductActivity extends AppCompatActivity implements View.OnCli
             DeleteProduct();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EditProductActivity.this, ProductsActivity.class));
+        finish();
     }
 
     private void GetTypeForChart() {

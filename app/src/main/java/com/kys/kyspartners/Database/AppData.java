@@ -124,6 +124,7 @@ public class AppData {
         editor.putInt("product_category", excel.product_category);
         editor.putInt("product_price", excel.product_price);
         editor.putInt("product_desc", excel.product_desc);
+        editor.putInt("product_logo", excel.product_logo);
         editor.putInt("stock", excel.stock);
         editor.apply();
     }
@@ -134,9 +135,10 @@ public class AppData {
         int p_category = prefs.getInt("product_category", 0);
         int p_price = prefs.getInt("product_price", 0);
         int p_desc = prefs.getInt("product_desc", 0);
+        int p_logo = prefs.getInt("product_logo", 0);
         int p_stock = prefs.getInt("stock", 0);
 
-        return new Excel(row_before, p_name, p_category, p_price, p_desc, p_stock);
+        return new Excel(row_before, p_name, p_category, p_price, p_desc, p_logo, p_stock);
     }
 
     public void setExcelSettingsAdded(boolean excel_added) {
