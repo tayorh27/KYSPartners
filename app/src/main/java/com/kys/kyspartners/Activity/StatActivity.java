@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.kys.kyspartners.Fragments.CategoryFragmentTab;
 import com.kys.kyspartners.Fragments.ExcelFragmentTab;
+import com.kys.kyspartners.Fragments.LocationFragmentTab;
 import com.kys.kyspartners.Fragments.ManualFragmentTab;
 import com.kys.kyspartners.Fragments.ProductFragmentTab;
 import com.kys.kyspartners.Fragments.ViewFragmentTab;
@@ -47,6 +48,7 @@ public class StatActivity extends AppCompatActivity {
                 .add("Views", ViewFragmentTab.class)
                 .add("Products", ProductFragmentTab.class)
                 .add("Category", CategoryFragmentTab.class)
+                .add("Location", LocationFragmentTab.class)
                 .create());
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -77,9 +79,18 @@ public class StatActivity extends AppCompatActivity {
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_menu_black_24dp),
                         Color.parseColor(colors[2])
-                ).title("Category")
+                ).title("Categories")
                         .selectedIcon(getResources().getDrawable(R.drawable.ic_menu_white_24dp))
                         .badgeTitle("CAT")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_place_black_24dp),
+                        Color.parseColor(colors[3])
+                ).title("Locations")
+                        .selectedIcon(getResources().getDrawable(R.drawable.ic_place_white_24dp))
+                        .badgeTitle("LOC")
                         .build()
         );
         navigationTabBar.setModels(models);

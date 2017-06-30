@@ -56,17 +56,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeHolder> {
             holder.ratingBar.setVisibility(View.GONE);
             holder.tvR.setVisibility(View.GONE);
             holder.tv_title.setText("Type: " + current.type);
-            holder.tv_comment.setHtmlFromString("<p style=\"color: #fff;\">Your shop was viewed by a user at <strong style=\"color:#2196F3;\"><i>" + loc[1] + "</i></strong></p>", false);
+            holder.tv_comment.setHtmlFromString("<p style=\"color: #fff;\">Your shop was viewed by a user at <strong style=\"color:#2196F3;\"><i>" + (loc.length == 1 ? loc[0] : loc[1]) + "</i></strong></p>", false);
         } else if (type.contentEquals("Product")) {
             holder.ratingBar.setVisibility(View.GONE);
             holder.tvR.setVisibility(View.GONE);
             holder.tv_title.setText("Type: " + current.type);
-            holder.tv_comment.setHtmlFromString("<p style=\"color: #fff;\">Product <strong style=\"color: #2196F3;\"><i>" + current.product_name + "</i></strong> was viewed by a user at <strong style=\"color:#2196F3; \"><i>" + loc[1] + "</i></strong></p>", false);
+            holder.tv_comment.setHtmlFromString("<p style=\"color: #fff;\">Product <strong style=\"color: #2196F3;\"><i>" + current.product_name + "</i></strong> was viewed by a user at <strong style=\"color:#2196F3; \"><i>" + (loc.length == 1 ? loc[0] : loc[1]) + "</i></strong></p>", false);
         } else if (type.contentEquals("Category")) {
             holder.ratingBar.setVisibility(View.GONE);
             holder.tvR.setVisibility(View.GONE);
             holder.tv_title.setText("Type: " + current.type);
-            holder.tv_comment.setHtmlFromString("<p style=\"color:#fff;\">Category <strong style=\"color:#2196F3; \"><i>" + current.category_name + "</i></strong> was viewed by a user at <strong style=\"color:#2196F3; \"><i>" + loc[1] + "</i></strong></p>", false);
+            holder.tv_comment.setHtmlFromString("<p style=\"color:#fff;\">Category <strong style=\"color:#2196F3; \"><i>" + current.category_name + "</i></strong> was viewed by a user at <strong style=\"color:#2196F3; \"><i>" + (loc.length == 1 ? loc[0] : loc[1]) + "</i></strong></p>", false);
         } else if (type.contentEquals("Rating")) {
             BigDecimal bd = new BigDecimal(Double.parseDouble(current.rating)).setScale(1, RoundingMode.HALF_UP);
             holder.tv_title.setText("Type: " + current.type);

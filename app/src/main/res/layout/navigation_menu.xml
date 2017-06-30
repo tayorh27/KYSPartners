@@ -44,6 +44,17 @@
                     style="@style/TextView.GuillotineItem"
                     android:text="My Products"
                     android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/tv_total_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/total_product_bg"
+                    android:text="189"
+                    android:textSize="20sp"
+                    android:textColor="#fff"
+                    android:textAllCaps="true" />
             </LinearLayout>
 
             <LinearLayout

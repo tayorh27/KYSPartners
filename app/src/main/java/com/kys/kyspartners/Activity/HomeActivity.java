@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyclerView;
     SwipeSelector swipeSelector;
     GetLogFromServer getLogFromServer;
-    TextView tv_view_all, expand_collapse;
+    TextView tv_view_all, expand_collapse, tv_total;
     SwipeRefreshLayout refreshLayout;
     HomeAdapter adapter;
     RelativeLayout relativeLayoutComment;
@@ -109,6 +109,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         myProfile = (LinearLayout) guillotineMenu.findViewById(R.id.my_profile);
         supportCentre = (LinearLayout) guillotineMenu.findViewById(R.id.support_centre);
         signout = (LinearLayout) guillotineMenu.findViewById(R.id.sign_out);
+        tv_total = (TextView) guillotineMenu.findViewById(R.id.tv_total_product);
         myProduct.setOnClickListener(this);
         addProduct.setOnClickListener(this);
         dataStat.setOnClickListener(this);
@@ -117,6 +118,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         supportCentre.setOnClickListener(this);
         signout.setOnClickListener(this);
         root.addView(guillotineMenu);
+
+        tv_total.setText(total_number_products());
 
         adapter = new HomeAdapter(HomeActivity.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
@@ -128,6 +131,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .setClosedOnStart(true)
                 .build();
         LoadCommentsAndFeeds();
+    }
+
+    private String total_number_products() {
+        ArrayList<Products> products = MyApplication.getWritableDatabase().getAllMyProducts();
+        int count = 0;
+        for (Products pro : products) {
+            if (!pro.shop_name.contentEquals("none")) {
+                count++;
+            }
+        }
+        return String.valueOf(count);
     }
 
     private void LoadCommentsAndFeeds() {

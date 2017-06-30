@@ -17,6 +17,7 @@
         <item>#F44336</item>
         <item>#009688</item>
         <item>#0737d4</item>
+        <item>#FF9800</item>
     </string-array>
     <string name="already"><u>I already have an account</u></string>
     <string name="forgot"><u>Forgot Password</u></string>

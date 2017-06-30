@@ -16,6 +16,7 @@ import com.kys.kyspartners.Callbacks.LogTypeCallback;
 import com.kys.kyspartners.Database.AppData;
 import com.kys.kyspartners.General;
 import com.kys.kyspartners.Information.Shop;
+import com.kys.kyspartners.Utility.LocationGetter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,9 +90,54 @@ public class GetLogType {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show();
-                if(imageView != null){
+                if (imageView != null) {
                     imageView.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void getShopLogLocation(final String filter) {
+        String url = AppConfig.WEB_URL + "GetLogLocation.php?shop_name=" + shop.name + "&user_id=" + shop.user_id;
+
+        String web_url = url.replace(" ", "%20");
+        final ArrayList<String> arrayList = new ArrayList<>();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, web_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.contentEquals("null")) {
+                    Toast.makeText(context, "No data available yet", Toast.LENGTH_SHORT).show();
+                    if (logCallback != null) {
+                        logCallback.onLogType(arrayList);
+                    }
+                }
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    String list = "";
+                    if (jsonArray.length() > 0) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String loc = jsonObject.getString("user_location");
+                            list = LocationGetter.getEachLocation(loc, filter);
+                            arrayList.add(list);
+                        }
+                        if (logCallback != null) {
+                            logCallback.onLogType(arrayList);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show();
             }
         });
         requestQueue.add(stringRequest);

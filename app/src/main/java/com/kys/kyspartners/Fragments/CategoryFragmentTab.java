@@ -47,6 +47,7 @@ public class CategoryFragmentTab extends Fragment implements LogTypeCallback, Vi
     View view1;
     ListView listView;
     ArrayList<String> listArray = new ArrayList<>();
+    ArrayList<String> listArray2 = new ArrayList<>();
     BottomSheetDialog dialog;
 
     @Override
@@ -108,11 +109,17 @@ public class CategoryFragmentTab extends Fragment implements LogTypeCallback, Vi
         barChart.animateXY(2000, 2000);
         barChart.invalidate();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listArray);
+        ArrayList<String> dataArray = new ArrayList<>();
+        for (int i = 0; i < listArray.size(); i++) {
+            dataArray.add(listArray.get(i) + "\n" + listArray2.get(i));
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, dataArray);
         listView.setAdapter(adapter);
     }
 
     private ArrayList<BarDataSet> getDataSet(Map<String, Integer> _value) {
+        listArray2.clear();
         ArrayList<BarDataSet> dataSets;
 
         ArrayList<BarEntry> valueSet1 = new ArrayList<>();
@@ -123,6 +130,7 @@ public class CategoryFragmentTab extends Fragment implements LogTypeCallback, Vi
 
             BarEntry v1e1 = new BarEntry(vl, count);
             valueSet1.add(v1e1);
+            listArray2.add(vl + "");
             count++;
         }
 
@@ -187,7 +195,7 @@ public class CategoryFragmentTab extends Fragment implements LogTypeCallback, Vi
     }
 
     private void BuildBottomSheet() {
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 480);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 640);
         dialog = new BottomSheetDialog(getActivity());
         dialog.setContentView(view1, layoutParams);
         dialog.setCanceledOnTouchOutside(true);
